@@ -1,0 +1,39 @@
+name: Sync Informant release
+
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-informant-release
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download latest formula
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag=$(gh release view --repo InformantDev/informant --json tagName --jq .tagName)
+          mkdir -p updated
+          if ! gh release download "$tag" --repo InformantDev/informant --pattern informant.rb --dir updated; then
+            echo "$tag predates automated formula publishing"
+            exit 0
+          fi
+          ruby -c updated/informant.rb
+          if cmp --silent updated/informant.rb Formula/informant.rb; then
+            echo "Formula already matches $tag"
+            exit 0
+          fi
+          mv updated/informant.rb Formula/informant.rb
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add Formula/informant.rb
+          git commit -m "chore: update Informant to $tag"
+          git push
