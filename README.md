@@ -20,6 +20,5 @@ install on Debian/Ubuntu and Fedora/RHEL hosts.
 ## Cutting a release (maintainers)
 
 The formula installs prebuilt, self-contained binaries from GitHub Releases in the main repository.
-Its release workflow publishes a generated `informant.rb` containing the release version and all
-four checksums. This repository's `Sync Informant release` workflow checks hourly and commits a new
-formula when that asset changes. It can also be run immediately with `workflow_dispatch`.
+The main repository's Informant `release` job publishes a generated `informant.rb` containing the
+release version and all four checksums, then opens the formula update pull request in this repository.
