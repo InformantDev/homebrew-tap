@@ -1,7 +1,7 @@
 class Informant < Formula
   desc "Local machines, reporting for CI duty"
   homepage "https://github.com/InformantDev/informant"
-  version "0.1.5"
+  version "0.1.6"
   license "Apache-2.0"
 
   depends_on "gh"
@@ -9,18 +9,18 @@ class Informant < Formula
   if OS.mac?
     if Hardware::CPU.arm?
       url "https://github.com/InformantDev/informant/releases/download/v#{version}/informant-darwin-arm64"
-      sha256 "1122f961ed6623fcd2f4edbcf1ce08e292727af4e1e9827bdc7f53a62dbeda61"
+      sha256 "0ed6d530effbace79d79a9a81706fc1db87cf0b85dc8132d04b64cc583726654"
     else
       url "https://github.com/InformantDev/informant/releases/download/v#{version}/informant-darwin-x64"
-      sha256 "6b7cdefc7168ea2e900305d5c9846485975195803d7a4cbfb0c8a8b728cae8d8"
+      sha256 "6765a14231bb891ca8665149d5a928a9ef014cb3a0a00bb4fe282e68323c0c31"
     end
   elsif OS.linux?
     if Hardware::CPU.arm?
       url "https://github.com/InformantDev/informant/releases/download/v#{version}/informant-linux-arm64"
-      sha256 "a61dcb3d7d912489d5d33f80845755f56917b355bf0095b3ba70decf967e56b7"
+      sha256 "a86b74115a4a4cca9dc7802c682048ab16e682face75ff4aa100a763d8b15e27"
     else
       url "https://github.com/InformantDev/informant/releases/download/v#{version}/informant-linux-x64"
-      sha256 "328181fd7016c42192c9b1e8e0ab1980a660b996e7427533469fc9265cae72d4"
+      sha256 "ec5d4746f5a4bc9b740be632cf9b06b26bcbdfba3202105e8069011ef90d8b59"
     end
   end
 
